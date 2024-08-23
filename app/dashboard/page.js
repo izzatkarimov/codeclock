@@ -4,7 +4,7 @@ import Login from "@/components/Login";
 import Main from "@/components/Main";
 
 export const metadata = {
-    title: "CodeClock ⋅ Dashboard",
+    title: "CodeClock | Dashboard",
   };
   
 
