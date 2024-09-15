@@ -42,49 +42,49 @@ const daysToDisplay = firstDayOfMonth + daysInMonth
 const numRows = (Math.floor(daysToDisplay / 7)) + (daysToDisplay % 7 ? 1 : 0)
 
 return (
-  <div className='flex flex-col gap-2'>
-      <div className='grid grid-cols-5 gap-4'>
-          <button onClick={() => {
-              handleIncrementMonth(-1)
-          }} className='mr-auto text-indigo-400 text-lg sm:text-xl duration-200 hover:opacity-60'><i className="fa-solid fa-circle-chevron-left"></i></button>
-          <p className={'text-center col-span-3 capitalized whitespace-nowrap textGradient ' + orbitron.className}>{selectedMonth}, {selectedYear}</p>
-          <button onClick={() => {
-              handleIncrementMonth(+1)
-          }} className='ml-auto text-indigo-400 text-lg sm:text-xl duration-200 hover:opacity-60'><i className="fa-solid fa-circle-chevron-right"></i></button>
-      </div>
-      <div className='flex flex-col overflow-hidden gap-1 py-4 sm:py-6 md:py-10'>
-          {[...Array(numRows).keys()].map((row, rowIndex) => {
-              return (
-                  <div key={rowIndex} className='grid grid-cols-7 gap-1'>
-                      {dayList.map((dayOfWeek, dayOfWeekIndex) => {
-                          let dayIndex = (rowIndex * 7) + dayOfWeekIndex - (firstDayOfMonth - 1)
+  <div className='flex flex-col gap-2 dark:bg-gray-800 p-4 rounded-lg'>
+    <div className='grid grid-cols-5 gap-4'>
+      <button onClick={() => handleIncrementMonth(-1)} className='mr-auto text-gray-400 dark:text-gray-600 text-lg sm:text-xl duration-200 hover:opacity-60'>
+        <i className="fa-solid fa-circle-chevron-left"></i>
+      </button>
+      <p className={'text-center col-span-3 capitalized whitespace-nowrap textGradient ' + orbitron.className}>{selectedMonth}, {selectedYear}</p>
+      <button onClick={() => handleIncrementMonth(+1)} className='ml-auto text-gray-400 dark:text-gray-600 text-lg sm:text-xl duration-200 hover:opacity-60'>
+        <i className="fa-solid fa-circle-chevron-right"></i>
+      </button>
+    </div>
+    <div className='flex flex-col overflow-hidden gap-1 py-4 sm:py-6 md:py-10'>
+      {[...Array(numRows).keys()].map((row, rowIndex) => (
+        <div key={rowIndex} className='grid grid-cols-7 gap-1'>
+          {dayList.map((dayOfWeek, dayOfWeekIndex) => {
+            let dayIndex = (rowIndex * 7) + dayOfWeekIndex - (firstDayOfMonth - 1)
+            let dayDisplay = dayIndex > daysInMonth ? false : (row === 0 && dayOfWeekIndex < firstDayOfMonth) ? false : true
+            let isToday = dayIndex === now.getDate()
 
-                          let dayDisplay = dayIndex > daysInMonth ? false : (row === 0 && dayOfWeekIndex < firstDayOfMonth) ? false : true
+            if (!dayDisplay) {
+              return <div className='bg-white dark:bg-gray-900' key={dayOfWeekIndex} />
+            }
 
-                          let isToday = dayIndex === now.getDate()
+            let color = demo
+              ? gradients.gray[baseRating[dayIndex]]
+              : dayIndex in data
+                ? gradients.gray[data[dayIndex]]
+                : 'white'
 
-                          if (!dayDisplay) {
-                              return (
-                                  <div className='bg-white' key={dayOfWeekIndex} />
-                              )
-                          }
-
-                          let color = demo ?
-                              gradients.indigo[baseRating[dayIndex]] :
-                              dayIndex in data ?
-                                  gradients.indigo[data[dayIndex]] :
-                                  'white'
-
-                          return (
-                              <div style={{ background: color }} className={'text-xs sm:text-sm border border-solid p-2 flex items-center gap-2 justify-between rounded-lg ' + (isToday ? ' border-indigo-400' : ' border-indigo-100') + (color === 'white' ? ' text-indigo-400' : ' text-white')} key={dayOfWeekIndex}>
-                                  <p>{dayIndex}</p>
-                              </div>
-                          )
-                      })}
-                  </div>
-              )
+            return (
+              <div
+                style={{ background: color }}
+                className={'text-xs sm:text-sm border border-solid p-2 flex items-center gap-2 justify-between rounded-lg ' +
+                  (isToday ? ' border-gray-400 dark:border-gray-600' : ' border-gray-100 dark:border-gray-700') +
+                  (color === 'white' ? ' text-gray-400 dark:text-gray-600' : ' text-white')}
+                key={dayOfWeekIndex}
+              >
+                <p>{dayIndex}</p>
+              </div>
+            )
           })}
-      </div>
+        </div>
+      ))}
+    </div>
   </div>
 )
 }

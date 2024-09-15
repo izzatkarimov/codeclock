@@ -43,13 +43,13 @@ export default function Login() {
       <input
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        className='w-full max-w-[400px] mx-auto px-3 duration-20 hover:border-indigo-600 focus:border-indigo-600 py-2 sm:py-3 border border-solid border-indigo-400 rounded-full outline-none'
+        className='w-full max-w-[400px] mx-auto px-3 duration-200 hover:border-gray-600 focus:border-gray-600 dark:hover:border-gray-400 dark:focus:border-gray-400 py-2 sm:py-3 border border-solid border-gray-400 dark:border-gray-600 rounded-full outline-none bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200'
         placeholder="Email"
       />
       <input
         value={password}
         onChange={(e) => setPassword(e.target.value)}
-        className='w-full max-w-[400px] mx-auto px-3 duration-20 hover:border-indigo-600 focus:border-indigo-600 py-2 sm:py-3 border border-solid border-indigo-400 rounded-full outline-none'
+        className='w-full max-w-[400px] mx-auto px-3 duration-200 hover:border-gray-600 focus:border-gray-600 dark:hover:border-gray-400 dark:focus:border-gray-400 py-2 sm:py-3 border border-solid border-gray-400 dark:border-gray-600 rounded-full outline-none bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200'
         placeholder="Password"
         type="password"
       />
@@ -66,7 +66,7 @@ export default function Login() {
         {isRegister ? 'Already have an account? ' : 'Don\'t have an account? '}
         <button
           onClick={() => SetIsRegister(!isRegister)}
-          className='text-indigo-600'
+          className='text-gray-600 dark:text-gray-400'
         >
           {isRegister ? 'Sign In' : 'Sign Up'}
         </button>
